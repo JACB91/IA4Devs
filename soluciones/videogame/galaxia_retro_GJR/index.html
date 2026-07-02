@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back to the Future Time Dodge</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #000;
+            font-family: Arial, sans-serif;
+        }
+        #gameContainer {
+            position: relative;
+            width: 400px;
+            height: 600px;
+            background: linear-gradient(to bottom, #000033, #000066);
+            border: 2px solid #0ff;
+            overflow: hidden;
+        }
+        #delorean {
+            position: absolute;
+            width: 80px;
+            height: 40px;
+            bottom: 20px;
+            left: 160px;
+            transition: transform 0.1s;
+        }
+        .obstacle {
+            position: absolute;
+            width: 60px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #timeDisplay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #0ff;
+            font-size: 24px;
+            text-shadow: 0 0 5px #0ff;
+            background: rgba(0,0,0,0.5);
+            padding: 5px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+        #score {
+            position: absolute;
+            top: 50px;
+            left: 10px;
+            color: #0ff;
+            font-size: 24px;
+            text-shadow: 0 0 5px #0ff;
+            background: rgba(0,0,0,0.5);
+            padding: 5px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+        #gameOver {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #0ff;
+            font-size: 24px;
+            text-align: center;
+            display: none;
+            background: rgba(0,0,0,0.8);
+            padding: 20px;
+            border: 2px solid #0ff;
+            z-index: 1000;
+        }
+        #startButton {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin-top: 20px;
+            cursor: pointer;
+            background: #000;
+            color: #0ff;
+            border: 2px solid #0ff;
+            border-radius: 5px;
+        }
+        .vehicle-icon {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="timeDisplay">Año: 1885</div>
+        <div id="score">Puntuación: 0</div>
+        <div id="delorean">
+            <!-- DeLorean Icon -->
+            <svg viewBox="0 0 80 40" class="vehicle-icon">
+                <path d="M10,30 L70,30 L65,25 L55,25 L50,15 L45,10 L35,8 L25,8 L15,10 L10,15 L5,25 L10,30" fill="silver"/>
+                <path d="M25,8 L45,8 L43,3 L27,3 Z" fill="lightgray"/>
+                <rect x="20" y="25" width="15" height="8" fill="black"/>
+                <rect x="45" y="25" width="15" height="8" fill="black"/>
+                <path d="M0,25 L15,25 L15,28 L0,28 Z" fill="#0ff"/>
+                <path d="M65,25 L80,25 L80,28 L65,28 Z" fill="#0ff"/>
+            </svg>
+        </div>
+        <div id="gameOver">
+            ¡Gran Scott!<br>
+            Puntuación Final: <span id="finalScore">0</span><br>
+            <button id="startButton">¡Volver al pasado!</button>
+        </div>
+    </div>
+
+    <script>
+        const vehicleIcons = {
+            1885: `
+                <svg viewBox="0 0 60 40" class="vehicle-icon">
+                    <rect x="10" y="15" width="40" height="15" fill="brown"/>
+                    <circle cx="15" cy="30" r="5" fill="black"/>
+                    <circle cx="45" cy="30" r="5" fill="black"/>
+                    <rect x="20" y="5" width="20" height="10" fill="brown"/>
+                </svg>
+            `,
+            1920: `
+                <svg viewBox="0 0 60 40" class="vehicle-icon">
+                    <path d="M5,30 L55,30 L50,15 L40,10 L20,10 L10,15 Z" fill="black"/>
+                    <rect x="10" y="25" width="10" height="8" fill="#333"/>
+                    <rect x="40" y="25" width="10" height="8" fill="#333"/>
+                </svg>
+            `,
+            1950: `
+                <svg viewBox="0 0 60 40" class="vehicle-icon">
+                    <path d="M5,30 L55,30 L52,20 L45,10 L15,10 L8,20 Z" fill="red"/>
+                    <rect x="15" y="12" width="30" height="8" fill="lightgray"/>
+                    <rect x="10" y="25" width="12" height="8" fill="black"/>
+                    <rect x="38" y="25" width="12" height="8" fill="black"/>
+                </svg>
+            `,
+            1980: `
+                <svg viewBox="0 0 60 40" class="vehicle-icon">
+                    <path d="M8,30 L52,30 L50,20 L45,10 L15,10 L10,20 Z" fill="blue"/>
+                    <rect x="18" y="12" width="24" height="8" fill="black"/>
+                    <rect x="12" y="25" width="10" height="8" fill="black"/>
+                    <rect x="38" y="25" width="10" height="8" fill="black"/>
+                </svg>
+            `,
+            2000: `
+                <svg viewBox="0 0 60 40" class="vehicle-icon">
+                    <path d="M5,30 L55,30 L52,15 L45,8 L15,8 L8,15 Z" fill="silver"/>
+                    <rect x="15" y="10" width="30" height="10" fill="lightblue"/>
+                    <rect x="10" y="25" width="12" height="8" fill="black"/>
+                    <rect x="38" y="25" width="12" height="8" fill="black"/>
+                </svg>
+            `,
+            2020: `
+                <svg viewBox="0 0 60 40" class="vehicle-icon">
+                    <path d="M5,30 L55,30 L53,18 L48,8 L12,8 L7,18 Z" fill="white"/>
+                    <rect x="12" y="10" width="36" height="10" fill="black"/>
+                    <rect x="8" y="25" width="12" height="8" fill="black"/>
+                    <rect x="40" y="25" width="12" height="8" fill="black"/>
+                </svg>
+            `,
+            2050: `
+                <svg viewBox="0 0 60 40" class="vehicle-icon">
+                    <path d="M30,5 L55,30 L5,30 Z" fill="silver"/>
+                    <rect x="25" y="15" width="10" height="20" fill="cyan"/>
+                    <circle cx="20" cy="30" r="5" fill="blue"/>
+                    <circle cx="40" cy="30" r="5" fill="blue"/>
+                </svg>
+            `
+        };
+
+        const delorean = document.getElementById('delorean');
+        const gameContainer = document.getElementById('gameContainer');
+        const scoreElement = document.getElementById('score');
+        const timeDisplay = document.getElementById('timeDisplay');
+        const gameOverElement = document.getElementById('gameOver');
+        const finalScoreElement = document.getElementById('finalScore');
+        const startButton = document.getElementById('startButton');
+
+        let score = 0;
+        let gameRunning = true;
+        let obstacles = [];
+        let deloreanX = 160;
+        let currentYear = 1885;
+        let keysPressed = {};
+
+        const deloreanSpeed = 15;
+        const containerWidth = 400;
+        const deloreanWidth = 80;
+
+        function getVehicleForYear(year) {
+            const years = Object.keys(vehicleIcons).map(Number);
+            const closestYear = years.reduce((prev, curr) => {
+                return Math.abs(curr - year) < Math.abs(prev - year) ? curr : prev;
+            });
+            return vehicleIcons[closestYear];
+        }
+
+        document.addEventListener('keydown', (e) => {
+            keysPressed[e.key] = true;
+        });
+
+        document.addEventListener('keyup', (e) => {
+            keysPressed[e.key] = false;
+            delorean.style.transform = 'rotate(0deg)';
+        });
+
+        function updateDelorean() {
+            if (!gameRunning) return;
+
+            if (keysPressed['ArrowLeft'] && deloreanX > 0) {
+                deloreanX -= deloreanSpeed;
+                delorean.style.transform = 'rotate(-10deg)';
+            }
+            if (keysPressed['ArrowRight'] && deloreanX < containerWidth - deloreanWidth) {
+                deloreanX += deloreanSpeed;
+                delorean.style.transform = 'rotate(10deg)';
+            }
+
+            delorean.style.left = deloreanX + 'px';
+            requestAnimationFrame(updateDelorean);
+        }
+
+        function createObstacle() {
+            if (!gameRunning) return;
+
+            const obstacle = document.createElement('div');
+            obstacle.className = 'obstacle';
+            obstacle.style.left = Math.random() * (containerWidth - 60) + 'px';
+            obstacle.style.top = '-40px';
+            
+            obstacle.innerHTML = getVehicleForYear(currentYear);
+            
+            gameContainer.appendChild(obstacle);
+            obstacles.push(obstacle);
+
+            const baseSpeed = 3;
+            const speedIncrease = Math.min(score / 500, 5);
+            const totalSpeed = baseSpeed + speedIncrease + Math.floor(score / 100);
+
+            function moveObstacle() {
+                if (!gameRunning) return;
+
+                const top = parseFloat(obstacle.style.top);
+                if (top > 600) {
+                    gameContainer.removeChild(obstacle);
+                    obstacles = obstacles.filter(a => a !== obstacle);
+                    score += 10;
+                    scoreElement.textContent = 'Puntuación: ' + score;
+                    updateTimeDisplay();
+                    return;
+                }
+
+                obstacle.style.top = (top + totalSpeed) + 'px';
+
+                const obstacleRect = obstacle.getBoundingClientRect();
+                const deloreanRect = delorean.getBoundingClientRect();
+
+                const buffer = 5;
+                if (!(obstacleRect.right < deloreanRect.left + buffer || 
+                    obstacleRect.left > deloreanRect.right - buffer || 
+                    obstacleRect.bottom < deloreanRect.top + buffer || 
+                    obstacleRect.top > deloreanRect.bottom - buffer)) {
+                    gameOver();
+                    return;
+                }
+
+                requestAnimationFrame(moveObstacle);
+            }
+
+            requestAnimationFrame(moveObstacle);
+        }
+
+        function updateTimeDisplay() {
+            const newYear = 1885 + Math.floor(score / 50) * 10;
+            if (newYear !== currentYear) {
+                currentYear = newYear;
+                timeDisplay.textContent = `Año: ${currentYear}`;
+                // Efecto de destello al cambiar de año
+                gameContainer.style.backgroundColor = '#fff';
+                setTimeout(() => {
+                    gameContainer.style.backgroundColor = '';
+                }, 50);
+            }
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            finalScoreElement.textContent = score;
+            gameOverElement.style.display = 'block';
+            obstacles.forEach(obstacle => gameContainer.removeChild(obstacle));
+            obstacles = [];
+        }
+
+        function startGame() {
+            requestAnimationFrame(updateDelorean);
+            
+            const obstacleInterval = setInterval(() => {
+                if (!gameRunning) {
+                    clearInterval(obstacleInterval);
+                    return;
+                }
+                createObstacle();
+            }, 1000);
+        }
+
+        startButton.addEventListener('click', () => {
+            score = 0;
+            currentYear = 1885;
+            deloreanX = 160;
+            delorean.style.left = deloreanX + 'px';
+            delorean.style.transform = 'rotate(0deg)';
+            scoreElement.textContent = 'Puntuación: 0';
+            timeDisplay.textContent = 'Año: 1885';
+            gameOverElement.style.display = 'none';
+            gameRunning = true;
+            startGame();
+        });
+
+        startGame();
+    </script>
+</body>
+</html>

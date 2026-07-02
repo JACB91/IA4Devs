@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>String Reverser Extravaganza!</title>
+    <meta name="description" content="Flip your words around with a twist!">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background-color: #F5F5F5; /* Light gray background */
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h1 class="text-3xl font-bold mb-4 text-center text-indigo-600">String Reverser Extravaganza!</h1>
+        <p class="text-center mb-6 text-gray-700">Flip your words around with a twist!</p>
+        <div id="alert-container"></div>
+        <div class="mb-4">
+            <input type="text" id="textInput" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500" placeholder="Enter text to reverse">
+        </div>
+        <div class="flex justify-center">
+            <button id="reverseButton" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 focus:outline-none">Reverse It!</button>
+        </div>
+        <div id="resultContainer" class="mt-6 text-center hidden">
+            <h2 class="text-2xl font-semibold text-gray-800">Reversed Text:</h2>
+            <p id="reversedText" class="text-xl text-gray-600 mt-2"></p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

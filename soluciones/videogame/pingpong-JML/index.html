@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ping Pong Game</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #1a1a1a;
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+        }
+        .retro-border {
+            border: 4px solid #ffcc00;
+            box-shadow: 0 0 10px #ffcc00;
+        }
+        #menu, #gameUI {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+        }
+        h1, h2 {
+            margin: 10px 0;
+        }
+        select, button {
+            margin: 10px 0;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        #gameUI {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 600px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 4px solid #ffcc00;
+            box-shadow: 0 0 10px #ffcc00;
+        }
+        #gameUI h1 {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0;
+            color: #fff;
+            text-shadow: 0 0 10px #ffcc00;
+        }
+        #scoreboard {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0;
+            color: #fff;
+        }
+        .button-panel {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .game-background {
+            background: repeating-linear-gradient(
+                45deg,
+                #1a1a1a,
+                #1a1a1a 10px,
+                #333 10px,
+                #333 20px
+            );
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        #gameContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+        .game-title {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            text-shadow: 0 0 10px #ffcc00;
+            z-index: 1;
+        }
+        #gameUI {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 600px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 4px solid #ffcc00;
+            box-shadow: 0 0 10px #ffcc00;
+        }
+        .button-panel {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        #scoreboard {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+        }
+        canvas {
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+        }
+        .retro-title {
+            background: #ffcc00;
+            color: #000;
+            padding: 15px 30px;
+            text-transform: uppercase;
+            border: 4px solid #000;
+            box-shadow: 4px 4px 0px #000;
+            margin-bottom: 30px;
+        }
+        .retro-select {
+            background: #000;
+            color: #ffcc00;
+            border: 4px solid #ffcc00;
+            padding: 15px;
+            width: 200px;
+            font-family: 'Press Start 2P', cursive;
+            text-align: center;
+            cursor: pointer;
+            outline: none;
+            text-transform: uppercase;
+            font-size: 12px;
+            box-shadow: 4px 4px 0px #ffcc00;
+            transition: all 0.1s ease;
+        }
+        .retro-select:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #ffcc00;
+        }
+        .retro-select option {
+            background: #000;
+            color: #ffcc00;
+            padding: 10px;
+            font-size: 12px;
+        }
+        .retro-button {
+            background: #ffcc00;
+            color: #000;
+            border: 4px solid #000;
+            padding: 15px 30px;
+            font-family: 'Press Start 2P', cursive;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #000;
+            transition: all 0.1s ease;
+        }
+        .retro-button:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #000;
+        }
+        .quit-button {
+            background: #ff3333;
+            color: #fff;
+            border: 4px solid #800000;
+            box-shadow: 4px 4px 0px #800000;
+        }
+        .quit-button:hover {
+            box-shadow: 2px 2px 0px #800000;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-background"></div>
+    <div id="gameContainer">
+        <h1 class="retro-title">Ping Pong</h1>
+        <div id="gameUI" class="retro-border">
+            <div id="scoreboard">Player: 0 - Opponent: 0</div>
+            <div class="button-panel">
+                <button id="pauseButton" onclick="pauseGame()" class="retro-button">Pause</button>
+                <button id="resumeButton" onclick="resumeGame()" class="retro-button" style="display: none;">Resume</button>
+                <button onclick="quitGame()" class="retro-button quit-button">Quit</button>
+            </div>
+        </div>
+    </div>
+    <div id="menu" class="retro-border">
+        <h1 class="retro-title">Ping Pong</h1>
+        <h2>Game Settings</h2>
+        <label for="maxGoals">Max Goals:</label>
+        <select id="maxGoals" class="retro-select">
+            <option value="1">1</option>
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="7" selected>7</option>
+        </select>
+        <br>
+        <label for="difficulty">Difficulty:</label>
+        <select id="difficulty" class="retro-select">
+            <option value="slow">Slow</option>
+            <option value="medium" selected>Medium</option>
+            <option value="fast">Fast</option>
+        </select>
+        <br>
+        <button onclick="startGame()" class="retro-button">Start Game</button>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

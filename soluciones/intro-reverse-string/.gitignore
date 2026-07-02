@@ -1,0 +1,132 @@
+# Sistema operativo macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+._*
+.DocumentRevisions-V100
+.fseventsd
+.TemporaryItems
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.com.apple.timemachine.supported
+.PKInstallSandboxManager
+
+# Sistema operativo Linux
+*~
+.nfs*
+
+# Archivos de logs
+*.log
+*.log.*
+
+# Dependencias
+node_modules/
+bower_components/
+vendor/
+jspm_packages/
+public/build/
+
+# Paquetes
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Archivos temporales o de backup
+*.bak
+*.tmp
+*.swp
+*.swo
+*.pid
+*.seed
+*.pid.lock
+*.rej
+*.orig
+
+# Archivos de compilación o intermediarios
+dist/
+build/
+bin/
+out/
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+*.class
+
+# Archivos de Python
+*.py[cod]
+__pycache__/
+venv/
+env/
+.venv/
+env.bak/
+.env
+*.pyo
+*.pyd
+
+# Archivos de Ruby
+*.gem
+*.rbc
+.bundle/
+vendor/bundle
+log/
+tmp/
+coverage/
+*.rake
+.rvmrc
+.rbenv-gemsets
+.ruby-version
+.ruby-gemset
+
+# Archivos de Node.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de Go
+*.exe
+*.exe~
+*.out
+*.test
+
+# Archivos de Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Archivos de PHP
+composer.phar
+vendor/
+
+# Archivos de Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.vscode/
+
+# Archivos de Git
+.git/
+*.orig
+*.lock
+
+# Archivos de configuración de Docker
+.dockerignore
+
+# Archivos de configuraciones de CI/CD
+.circleci/
+.github/
+.gitlab-ci.yml
+
+# Archivos de configuración del sistema operativo
+Thumbs.db
+Desktop.ini

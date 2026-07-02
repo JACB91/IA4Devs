@@ -1,0 +1,19 @@
+road-fighter/
+├── assets/
+│   ├── images/
+│   │   ├── sprites/
+│   │   ├── backgrounds/
+│   │   └── ui/
+│   ├── audio/
+│   │   ├── sfx/
+│   │   └── music/
+│   └── maps/
+├── src/
+│   ├── config/
+│   ├── scenes/
+│   ├── entities/
+│   ├── services/
+│   ├── ui/
+│   └── utils/
+├── index.html
+└── package.json 

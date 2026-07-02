@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memo Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preload" as="image" href="img/lion.png">
+    <link rel="preload" as="image" href="img/bear.png">
+    <link rel="preload" as="image" href="img/monkey.png">
+    <link rel="preload" as="image" href="img/koala.png">
+    <link rel="preload" as="image" href="img/dog.png">
+    <link rel="preload" as="image" href="img/tiger.png">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-2 py-4">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-6">Memo Game</h1>
+            <div class="timer-container mb-4">
+                <span class="text-2xl font-semibold">Tiempo: <span id="timer">--</span>s</span>
+            </div>
+        </header>
+
+        <!-- Selector de niveles -->
+        <div class="level-selector flex justify-center gap-4 mb-8">
+            <button class="level-btn px-6 py-2 rounded-lg bg-gray-200 hover:bg-gray-300" data-level="1">Nivel 1</button>
+            <button class="level-btn px-6 py-2 rounded-lg bg-gray-200 hover:bg-gray-300" data-level="2">Nivel 2</button>
+            <button class="level-btn px-6 py-2 rounded-lg bg-gray-200 hover:bg-gray-300" data-level="3">Nivel 3</button>
+        </div>
+
+        <!-- Grid de cartas -->
+        <div id="game-board" class="grid grid-cols-3 md:grid-cols-4 gap-2 max-w-3xl mx-auto mb-8">
+        </div>
+
+        <!-- Controles -->
+        <div class="text-center">
+            <button id="start-game" class="bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 text-lg font-semibold disabled:opacity-50" disabled>
+                Empezar
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de resultado -->
+    <div id="result-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white p-8 rounded-lg text-center">
+            <h2 id="result-message" class="text-2xl font-bold mb-4"></h2>
+            <button id="play-again" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">
+                Jugar de nuevo
+            </button>
+        </div>
+    </div>
+
+    <script src="js/game.js"></script>
+</body>
+</html> 

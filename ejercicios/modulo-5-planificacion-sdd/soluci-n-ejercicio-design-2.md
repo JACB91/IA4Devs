@@ -9,3 +9,12 @@ Has dado un paso importante en la planificación y gestión del desarrollo del s
 Ahora puedes revisar la solución oficial para comparar la estructuración y priorización del backlog, la claridad de las User Stories y el aterrizaje técnico de los tickets de trabajo. Analiza los enfoques utilizados y considera si hay ajustes que podrías realizar en tu propio planteamiento.
 
 🔗 **Solución:** [https://github.com/LIDR-academy/AI4Devs-design-2-solved](https://github.com/LIDR-academy/AI4Devs-design-2-solved)
+
+## Repositorio de solucion
+
+https://github.com/LIDR-academy/AI4Devs-design-2-solved
+
+## Repositorio del ejercicio
+
+https://github.com/LIDR-academy/AI4Devs-design-2-2604
+

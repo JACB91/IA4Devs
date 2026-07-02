@@ -9,3 +9,12 @@ Has creado un juego genial que sumado al de tus compañeros podría tratarse de 
 Ahora puedes revisar la solución oficial con variedad de ejemplos de videojuegos.
 
 🔗 **Solución: **[https://github.com/LIDR-academy/AI4Devs-videogame-solved](https://github.com/LIDR-academy/AI4Devs-videogame-solved)
+
+## Repositorio de solucion
+
+https://github.com/LIDR-academy/AI4Devs-videogame-solved
+
+## Repositorio del ejercicio
+
+https://github.com/LIDR-academy/AI4Devs-Videogame-2604
+

@@ -9,3 +9,12 @@ Has trabajado en la creación de un **cronómetro y cuenta atrás**, aplicando 
 Ahora, revisa la solución oficial y analiza los enfoques utilizados. Observa la implementación del diseño, la funcionalidad y el uso de prompts en el desarrollo. ¿Hay algo que podrías mejorar en tu propia versión?
 
 🔗 **Solución:** [https://github.com/LIDR-academy/AI4Devs-stopwatch-solved](https://github.com/LIDR-academy/AI4Devs-stopwatch-solved)
+
+## Repositorio de solucion
+
+https://github.com/LIDR-academy/AI4Devs-stopwatch-solved
+
+## Repositorio del ejercicio
+
+https://github.com/LIDR-academy/AI4Devs-stopwatch-2604
+

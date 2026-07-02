@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ball Shooter Game</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: url("https://www.transparenttextures.com/patterns/brushed-alum.png")
+          gray;
+      }
+      canvas {
+        display: block;
+        background-color: #f0f0f0;
+      }
+      .instructions {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+      }
+      .instructions ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .instructions li {
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="instructions">
+      <ul>
+        <li>
+          <strong>Move:</strong> Use the arrow keys (← and →) to move left or
+          right.
+        </li>
+        <li><strong>Shoot:</strong> Press the spacebar to shoot upward.</li>
+        <li>
+          <strong>Objective:</strong> Avoid falling balls and destroy them by
+          shooting.
+        </li>
+      </ul>
+    </div>
+    <canvas id="gameCanvas"></canvas>
+    <script>
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const player = {
+        x: canvas.width / 2,
+        y: canvas.height - 50,
+        width: 50,
+        height: 50,
+        speed: 5,
+        dx: 0,
+        bullets: [],
+      };
+
+      const balls = [];
+      let gameOver = false;
+
+      function drawPlayer() {
+        ctx.font = "48px serif";
+        ctx.fillText("😊", player.x, player.y);
+      }
+
+      function drawBullets() {
+        player.bullets.forEach((bullet) => {
+          ctx.beginPath();
+          ctx.arc(bullet.x, bullet.y, 5, 0, Math.PI * 2);
+          ctx.fillStyle = "black";
+          ctx.fill();
+          ctx.closePath();
+        });
+      }
+
+      function drawBalls() {
+        balls.forEach((ball) => {
+          ctx.beginPath();
+          ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+          ctx.fillStyle = ball.color;
+          ctx.fill();
+          ctx.closePath();
+        });
+      }
+
+      function movePlayer() {
+        player.x += player.dx;
+        if (player.x < 0) player.x = 0;
+        if (player.x + player.width > canvas.width)
+          player.x = canvas.width - player.width;
+      }
+
+      function moveBullets() {
+        player.bullets.forEach((bullet, index) => {
+          bullet.y -= bullet.speed;
+          if (bullet.y < 0) player.bullets.splice(index, 1);
+        });
+      }
+
+      function moveBalls() {
+        balls.forEach((ball) => {
+          ball.y += ball.dy;
+          ball.x += ball.dx;
+          if (ball.y + ball.radius > canvas.height) {
+            ball.dy = -ball.dy;
+            ball.y = canvas.height - ball.radius;
+          }
+          if (ball.y - ball.radius < 0) {
+            ball.dy = -ball.dy;
+            ball.y = ball.radius;
+          }
+          if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
+            ball.dx = -ball.dx;
+          }
+        });
+      }
+
+      function detectCollisions() {
+        balls.forEach((ball, ballIndex) => {
+          if (
+            ball.y + ball.radius > player.y &&
+            ball.x > player.x &&
+            ball.x < player.x + player.width
+          ) {
+            gameOver = true;
+          }
+          player.bullets.forEach((bullet, bulletIndex) => {
+            const dist = Math.hypot(bullet.x - ball.x, bullet.y - ball.y);
+            if (dist - ball.radius - 5 < 1) {
+              player.bullets.splice(bulletIndex, 1);
+              if (ball.radius > 10) {
+                balls.push({
+                  x: ball.x,
+                  y: ball.y,
+                  radius: ball.radius / 2,
+                  dx: ball.dx,
+                  dy: -ball.dy,
+                  color: ball.color,
+                });
+                balls.push({
+                  x: ball.x,
+                  y: ball.y,
+                  radius: ball.radius / 2,
+                  dx: -ball.dx,
+                  dy: ball.dy,
+                  color: ball.color,
+                });
+              }
+              balls.splice(ballIndex, 1);
+            }
+          });
+        });
+      }
+
+      function update() {
+        if (gameOver) {
+          alert("Game Over");
+          document.location.reload();
+          return;
+        }
+        movePlayer();
+        moveBullets();
+        moveBalls();
+        detectCollisions();
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawPlayer();
+        drawBullets();
+        drawBalls();
+      }
+
+      function loop() {
+        update();
+        draw();
+        requestAnimationFrame(loop);
+      }
+
+      function keyDown(e) {
+        if (e.key === "ArrowRight" || e.key === "Right") {
+          player.dx = player.speed;
+        } else if (e.key === "ArrowLeft" || e.key === "Left") {
+          player.dx = -player.speed;
+        } else if (e.key === " ") {
+          player.bullets.push({
+            x: player.x + player.width / 2,
+            y: player.y,
+            speed: 7,
+          });
+        }
+      }
+
+      function keyUp(e) {
+        if (
+          e.key === "ArrowRight" ||
+          e.key === "Right" ||
+          e.key === "ArrowLeft" ||
+          e.key === "Left"
+        ) {
+          player.dx = 0;
+        }
+      }
+
+      function createBall() {
+        const radius = Math.random() * 20 + 20;
+        balls.push({
+          x: Math.random() * (canvas.width - radius * 2) + radius,
+          y: radius,
+          radius: radius,
+          dx: (Math.random() - 0.5) * 4,
+          dy: Math.random() * 2 + 1,
+          color: `hsl(${Math.random() * 360}, 50%, 50%)`,
+        });
+      }
+
+      document.addEventListener("keydown", keyDown);
+      document.addEventListener("keyup", keyUp);
+
+      setInterval(createBall, 2000);
+      loop();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tetris - WSN</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <div id="game-board"></div>
+        <div class="info-panel">
+            <div id="score-display">Puntuación: <span id="score">0</span></div>
+            <div id="level-display">
+                Nivel: <span id="level">1</span><br>
+                Objetivo: <span id="level-goal">500</span>
+            </div>
+            <div id="next-pieces">
+                <h3>Siguientes piezas:</h3>
+                <div class="next-piece-preview" id="next-1"></div>
+                <div class="next-piece-preview" id="next-2"></div>
+                <div class="next-piece-preview" id="next-3"></div>
+            </div>
+        </div>
+    </div>
+    <div class="controls">
+        <button id="start-button">Iniciar</button>
+        <button id="pause-button">Pausar</button>
+        <button id="reset-button">Reiniciar</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

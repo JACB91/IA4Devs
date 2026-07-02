@@ -9,3 +9,12 @@ Has configurado el entorno de desarrollo para **ejecutar tests unitarios con Je
 Aunque este ejercicio no requiere entrega, puedes revisar la solución oficial para comparar tu configuración y asegurarte de que todo está correctamente preparado para la siguiente fase, donde empezarás a escribir **tests unitarios**.
 
 🔗 **Solución:** [Preparación de entorno - AI4Devs](https://github.com/LIDR-academy/AI4Devs-tdd-solved)
+
+## Repositorio de solucion
+
+https://github.com/LIDR-academy/AI4Devs-tdd-solved
+
+## Repositorio del ejercicio
+
+https://github.com/LIDR-academy/AI4Devs-tdd-2604
+

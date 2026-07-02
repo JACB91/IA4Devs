@@ -1,0 +1,39 @@
+[
+    {
+        "vehicles": [
+            { "type": "car", "x": 0, "y": 0, "orientation": "vertical", "isTarget": false },
+            { "type": "car", "x": 1, "y": 3, "orientation": "vertical", "isTarget": false },
+            { "type": "car", "x": 2, "y": 0, "orientation": "vertical", "isTarget": false },
+            { "type": "car", "x": 3, "y": 2, "orientation": "vertical", "isTarget": false },
+            { "type": "car", "x": 4, "y": 2, "orientation": "vertical", "isTarget": false },
+            { "type": "car", "x": 6, "y": 1, "orientation": "vertical", "isTarget": false },
+            { "type": "truck", "x": 7, "y": 2, "orientation": "vertical", "isTarget": false },
+            { "type": "truck", "x": 3, "y": 1, "orientation": "horizontal", "isTarget": false },
+            { "type": "car", "x": 2, "y": 4, "orientation": "horizontal", "isTarget": false },
+            { "type": "truck", "x": 4, "y": 4, "orientation": "horizontal", "isTarget": false },
+            { "type": "truck", "x": 0, "y": 5, "orientation": "horizontal", "isTarget": false },
+            { "type": "car", "x": 0, "y": 2, "orientation": "horizontal", "isTarget": true }
+        ],
+        "exit": { "x": 7, "y": 2 }
+    },
+    {
+        "vehicles": [
+            { "type": "car", "x": 0, "y": 0, "orientation": "vertical", "isTarget": false },
+            { "type": "car", "x": 0, "y": 4, "orientation": "vertical", "isTarget": false },
+            { "type": "car", "x": 1, "y": 3, "orientation": "vertical", "isTarget": false },
+            { "type": "car", "x": 2, "y": 1, "orientation": "vertical", "isTarget": false },
+            { "type": "car", "x": 2, "y": 3, "orientation": "vertical", "isTarget": false },
+            { "type": "car", "x": 3, "y": 2, "orientation": "vertical", "isTarget": false },
+            { "type": "car", "x": 4, "y": 0, "orientation": "vertical", "isTarget": false },
+            { "type": "car", "x": 5, "y": 2, "orientation": "vertical", "isTarget": false },
+            { "type": "truck", "x": 6, "y": 1, "orientation": "vertical", "isTarget": false },
+            { "type": "car", "x": 7, "y": 3, "orientation": "vertical", "isTarget": false },
+            { "type": "truck", "x": 1, "y": 0, "orientation": "horizontal", "isTarget": false },
+            { "type": "truck", "x": 3, "y": 4, "orientation": "horizontal", "isTarget": false },
+            { "type": "truck", "x": 1, "y": 5, "orientation": "horizontal", "isTarget": false },
+            { "type": "car", "x": 5, "y": 5, "orientation": "horizontal", "isTarget": false },
+            { "type": "car", "x": 0, "y": 2, "orientation": "horizontal", "isTarget": true }
+        ],
+        "exit": { "x": 7, "y": 2 }
+    }
+]

@@ -1,0 +1,238 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+
+h2 a {
+  color: #4caf50;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+h2 a:hover {
+  color: #45a049;
+  text-decoration: underline;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  height: 10dvh;
+}
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70dvh;
+  flex: auto;
+}
+
+.stopwatch-container {
+  text-align: center;
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+}
+
+.time-display {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.time-unit {
+  display: inline-block;
+  min-width: 1.2em;
+  text-align: center;
+}
+
+.time-separator {
+  margin: 0 2px;
+}
+
+#milliseconds {
+  font-size: 1.5rem;
+  min-width: 1.5em;
+  vertical-align: super;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+button {
+  font-size: 1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.primary-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.primary-button.pause {
+  background-color: #f44336;
+}
+
+.secondary-button {
+  background-color: #2196f3;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+footer {
+  margin-top: auto;
+  background-color: #fff;
+  border-top: 1px solid #e0e0e0;
+}
+
+.tabs-container {
+  max-width: 1080px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+
+.tab-button {
+  background-color: #f8f8f8;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.tab-button.active {
+  background-color: #fff;
+  border-bottom: 2px solid #4caf50;
+}
+
+.tab-content {
+  padding: 20px 0;
+  background-color: #fff;
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  .time-display {
+    font-size: 2.5rem;
+  }
+
+  #milliseconds {
+    font-size: 1.25rem;
+  }
+
+  .app-container {
+    padding: 20px;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+  }
+
+  .time-display {
+    font-size: 2rem;
+  }
+
+  #milliseconds {
+    font-size: 1rem;
+  }
+
+  .app-container {
+    padding: 15px;
+  }
+
+  button {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+
+  .tabs-container {
+    padding: 15px;
+  }
+}

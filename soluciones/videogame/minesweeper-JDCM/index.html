@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscaminas - JDCM</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div class="container-fluid p-4">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-auto">
+                <div id="game-container" class="d-flex flex-column align-items-center gap-3">
+                    <!-- Theme Toggle -->
+                    <div id="theme-toggle" class="position-absolute top-0 end-0 m-3">🌙</div>
+                    
+                    <!-- Game Header -->
+                    <div id="header" class="w-100 p-3 rounded">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="counter-container">
+                                <span class="counter-icon">🚩</span>
+                                <div id="mine-counter" class="fs-5">000</div>
+                            </div>
+                            <button id="reset-button" class="btn btn-lg">😊</button>
+                            <div class="counter-container">
+                                <span class="counter-icon">⏱️</span>
+                                <div id="timer" class="fs-5">000</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Game Board -->
+                    <div class="game-board-container">
+                        <div id="game-board"></div>
+                    </div>
+                    
+                    <!-- Controls -->
+                    <div id="controls" class="d-flex gap-2 flex-wrap justify-content-center">
+                        <select id="difficulty" class="form-select">
+                            <option value="beginner">Principiante</option>
+                            <option value="intermediate">Intermedio</option>
+                            <option value="expert">Experto</option>
+                        </select>
+                        <button id="new-game" class="btn btn-primary">Nuevo Juego</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    <div id="message-modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">¡Atención!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="modal-message" class="mb-0"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="scripts/game.js"></script>
+</body>
+</html> 
