@@ -16,15 +16,6 @@ ejercicios/
 └── modulo-10-frontend/           # Buenas practicas, interfaz LTI
 ```
 
-## Skills
-
-SDD Agent skills para Hermes Agent:
-
-- `sdd-agent` — Resuelve PRDs completos: analisis → arquitectura → tickets → tests → codigo
-- `prd-to-tickets` — Convierte PRDs en tickets de implementacion ordenados
-
-Usar con: `hermes skill load sdd-agent`
-
 ## Proyecto LTI
 
 LTI (Applicant Tracking System) es el proyecto continuo que se desarrolla a lo largo del curso. Los ejercicios cubren:
